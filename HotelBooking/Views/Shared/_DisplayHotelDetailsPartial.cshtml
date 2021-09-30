@@ -1,0 +1,31 @@
+﻿@model HotelModel
+
+@{ 
+    string photoPath = "~/img/" + Model.PhotoPath;
+    string hotelAddress = $"{Model.HotelAddress}, {Model.HotelCity}, {Model.Country.CountryName}";
+    string controller = (string)ViewData["controller"];
+    string action = (string)ViewData["action"];
+}
+
+
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@photoPath" class="img-fluid rounded-start" asp-append-version="true" />
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title mb-3">
+                    <a asp-controller="@controller" asp-action="@action" asp-route-hotelId="@Model.HotelId">@Model.HotelName</a>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">@hotelAddress</h6>
+                <p class="card-text">@Model.HotelDescription</p>
+            </div>
+            <div class="row">
+                <div class="col-12 text-end">
+                    <p class="card-text me-5"><small class="text-muted">@Model.Owner.UserName</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<HotelModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["controller"] = "Home";
+    ViewData["action"] = "Details";
+}
+
+@foreach (var hotel in Model)
+{
+     <partial name="_DisplayHotelDetailsPartial" model="hotel" view-data="ViewData" />
+}

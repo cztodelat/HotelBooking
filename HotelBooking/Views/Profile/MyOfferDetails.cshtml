@@ -1,0 +1,74 @@
+﻿@model OwnerHotelDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Hotel.HotelName;
+    string photoPath = "~/img/" + Model.Hotel.PhotoPath;
+    string address = $"{Model.Hotel.HotelAddress}, {Model.Hotel.Country.CountryName}, {Model.Hotel.HotelCity}";
+    AddRoomViewModel addRoomViewModel = new AddRoomViewModel() { HotelId = Model.Hotel.HotelId };
+}
+
+<div class="row">
+    <div class="col-3">
+        <partial name="_SidebarMenuPartial" />
+    </div>
+    <div class="col-9">
+        <div class="row">
+            <div class="col">
+                <h2>@Model.Hotel.HotelName</h2>
+            </div>
+            <div class="col-auto mt-2">
+                <a class="btn btn-primary" asp-controller="Profile" asp-action="HotelEdit" asp-route-hotelId="@Model.Hotel.HotelId">
+                    Edit hotel
+                </a>
+            </div>
+        </div>
+        <p><strong>Address :</strong> @address</p>
+        <div class="row">
+            <div class="col-6">
+                <img class="d-block w-100" src="@photoPath" asp-append-version="true" />
+            </div>
+            <div class="col-6">
+                <p class="pt-3">@Model.Hotel.HotelDescription</p>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <h5>Rooms</h5>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+                    Add room
+                </button>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            @foreach (RoomModel room in Model.Rooms)
+            {
+                <div class="col-12">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Room number : @room.RoomNumber</li>
+                                    <li class="list-group-item">Floor : @room.Floor</li>
+                                    <li class="list-group-item">Price : @room.RoomPrice</li>
+                                    <li class="list-group-item">Status : @room.RoomStatus.StatusName</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-subtitle">Description</h5>
+                                    <p class="card-text">@room.Description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<partial name="_AddRoomPartial" model="addRoomViewModel">

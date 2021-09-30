@@ -1,0 +1,37 @@
+﻿@model HotelModel
+
+@{
+    ViewData["Title"] = "Hotel Details";
+    string photoPath = "~/img/" + Model.PhotoPath;
+    string address = $"{Model.HotelAddress}, {Model.Country.CountryName}, {Model.HotelCity}";
+
+    BookViewModel bookViewModel = new BookViewModel()
+    {
+        HotelId = Model.HotelId,
+        DateFrom = DateTime.Now,
+        DateTo = DateTime.Now,
+        Rooms = Model.Rooms.Where(x => x.RoomStatus.IsRoomOccupied == false).ToList()
+    };
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-auto">
+                <h2>@Model.HotelName</h2>
+            </div>
+            <div class="col-2 mt-1">
+                <!-- Button triggers modal -->
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bookModal">
+                    Book the hotel
+                </button>
+            </div>
+        </div>
+
+        <p><strong>Address :</strong> @address</p>
+        <img class="d-block w-75" src="@photoPath" asp-append-version="true" />
+        <p class="pt-3">@Model.HotelDescription</p>
+    </div>
+</div>
+
+<partial name="_BookRoomPartial" model="bookViewModel">

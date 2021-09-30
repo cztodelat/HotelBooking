@@ -1,0 +1,137 @@
+﻿@model IEnumerable<BookingModel>
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<div class="row">
+    <div class="col-3">
+        <partial name="_SidebarMenuPartial" />
+    </div>
+    <div class="col-9">
+        <div class="row">
+            <h2>My bookings</h2>
+
+            <div class="col-12">
+                @* Actual bookings *@
+                <div class="row mt-4">
+                    <h5>Actual bookings</h5>
+                    <div class="col-12">
+                        @foreach (var booking in Model)
+                        {
+                            if (booking.DateTo >= DateTime.Now && booking.IsActive)
+                            {
+                                <div class="row">
+                                    <div class="col-12 mt-4">
+                                        <div class="row mb-2">
+                                            <div class="col-auto mt-1">
+                                                <h5>@booking.Hotel.HotelName</h5>
+                                            </div>
+                                            <div class="col-1">
+                                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModel">
+                                                    Cancel
+                                                </button>
+                                            </div>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="confirmationModel" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Are you sure?</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Do you really want to cancel your booking?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                            <a type="button" class="btn btn-primary"
+                                                               asp-controller="Profile"
+                                                               asp-action="CancelBooking"
+                                                               asp-route-bookingId="@booking.BookingId">Yes</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>Book date : <strong>@booking.DateForm.ToString("D") - @booking.DateTo.ToString("D")</strong></p>
+                                        @foreach (var roomBooked in booking.BookedRooms)
+                                        {
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card mb-3">
+                                                        <div class="row g-0">
+                                                            <div class="col-md-4">
+                                                                <ul class="list-group list-group-flush">
+                                                                    <li class="list-group-item">Room number : @roomBooked.Room.RoomNumber</li>
+                                                                    <li class="list-group-item">Floor : @roomBooked.Room.Floor</li>
+                                                                    <li class="list-group-item">Price : @roomBooked.Room.RoomPrice</li>
+                                                                    <li class="list-group-item">Status : @roomBooked.Room.RoomStatus.StatusName</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-subtitle">Description</h5>
+                                                                    <p class="card-text">@roomBooked.Room.Description</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                @* Bookings history *@
+                <div class="row  mt-4">
+                    <h5>Booking history</h5>
+                    <div class="col-12">
+                        @foreach (var booking in Model)
+                        {
+                            if (booking.DateTo < DateTime.Now || !booking.IsActive)
+                            {
+                                <div class="row">
+                                    <div class="col-12 mt-4">
+                                        <h5>@booking.Hotel.HotelName</h5>
+                                        <p>Book date : <strong>@booking.DateForm.ToString("D") - @booking.DateTo.ToString("D")</strong></p>
+                                        @foreach (var roomBooked in booking.BookedRooms)
+                                        {
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card mb-3">
+                                                        <div class="row g-0">
+                                                            <div class="col-md-4">
+                                                                <ul class="list-group list-group-flush">
+                                                                    <li class="list-group-item">Room number : @roomBooked.Room.RoomNumber</li>
+                                                                    <li class="list-group-item">Floor : @roomBooked.Room.Floor</li>
+                                                                    <li class="list-group-item">Price : @roomBooked.Room.RoomPrice</li>
+                                                                    <li class="list-group-item">Status : @roomBooked.Room.RoomStatus.StatusName</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-subtitle">Description</h5>
+                                                                    <p class="card-text">@roomBooked.Room.Description</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

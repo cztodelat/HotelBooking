@@ -1,0 +1,17 @@
+﻿@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="row">
+    <div class="col-3">
+        <partial name="_SidebarMenuPartial" />
+    </div>
+    <div class="col-9">
+            <p>Name : @Model.Name</p>
+            <p>Surname : @Model.Surname</p>
+            <p>Email : @Model.Email</p>
+
+    </div>
+</div>

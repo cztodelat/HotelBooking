@@ -1,0 +1,74 @@
+﻿@model BookViewModel
+<!-- Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form method="post" asp-action="Book" asp-controller="Profile">
+                <input asp-for="@Model.HotelId" hidden />
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <h6>Please choose the date</h6>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label asp-for="DateFrom">From</label>
+                                    <input asp-for="DateFrom" class="form-control" />
+                                    <span asp-validation-for="DateFrom" class="text-danger"></span>
+                                </div>
+                                <div class="col-6">
+                                    <label asp-for="DateTo">To</label>
+                                    <input asp-for="DateTo" class="form-control" />
+                                    <span asp-validation-for="DateTo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <h6>How many rooms would you like to book?</h6>
+                                @* TODO Возможно это даже стоит вынести в partial view *@
+                                @for (int i = 0; i < Model.Rooms.Count; i++)
+                                {
+                                    <input asp-for="@Model.Rooms[i].RoomId" hidden />
+
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <input asp-for="@Model.Rooms[i].RoomStatus.IsRoomOccupied" />
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="card mb-3">
+                                                <div class="row g-0">
+                                                    <div class="col-md-4">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">Room number : @Model.Rooms[i].RoomNumber</li>
+                                                            <li class="list-group-item">Floor : @Model.Rooms[i].Floor</li>
+                                                            <li class="list-group-item">Price : @Model.Rooms[i].RoomPrice</li>
+                                                            <li class="list-group-item">Status : @Model.Rooms[i].RoomStatus.StatusName</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body">
+                                                            <h5 class="card-subtitle">Description</h5>
+                                                            <p class="card-text">@Model.Rooms[i].Description</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
