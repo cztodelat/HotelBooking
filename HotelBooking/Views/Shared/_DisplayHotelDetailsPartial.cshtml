@@ -8,17 +8,42 @@
 }
 
 
-<div class="card mb-3">
-    <div class="row g-0">
+<div class="card card_margin-b-md">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card__image-wrapper">
+                <img class="card__image" src="@photoPath" asp-append-version="true" />
+            </div>
+        </div>
+        <div class="col-md-8 d-flex">
+            <div class="card__content">
+                <div class="card__info">
+                    <h2 class="card__title">
+                        <a class="card__title-link" asp-controller="@controller" asp-action="@action" asp-route-hotelId="@Model.HotelId">@Model.HotelName</a>
+                    </h2>
+                    <span class="card__address">@hotelAddress</span>
+                    <p class="card__desc">@Model.HotelDescription</p>
+                </div>
+
+                <span class="card__email">Owner : @Model.Owner.Email</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<div class="card card_margin-b-md">
+    <div class="row">
         <div class="col-md-4">
             <img src="@photoPath" class="img-fluid rounded-start" asp-append-version="true" />
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title mb-3">
+                <h2 class="card-title">
                     <a asp-controller="@controller" asp-action="@action" asp-route-hotelId="@Model.HotelId">@Model.HotelName</a>
-                </h5>
-                <h6 class="card-subtitle mb-2 text-muted">@hotelAddress</h6>
+                </h2>
+                <h6 class="card-subtitle text-muted">@hotelAddress</h6>
                 <p class="card-text">@Model.HotelDescription</p>
             </div>
             <div class="row">
@@ -28,4 +53,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@

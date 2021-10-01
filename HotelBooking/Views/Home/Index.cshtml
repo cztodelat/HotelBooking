@@ -6,7 +6,12 @@
     ViewData["action"] = "Details";
 }
 
-@foreach (var hotel in Model)
-{
-     <partial name="_DisplayHotelDetailsPartial" model="hotel" view-data="ViewData" />
-}
+@* Добавляем контейнер каждой секции, так как ширина секции может измениться, и мы не должны ставить общие секции *@
+<section class="hotels-list">
+    <div class="container">
+        @foreach (var hotel in Model)
+        {
+            <partial name="_DisplayHotelDetailsPartial" model="hotel" view-data="ViewData" />
+        }
+    </div>
+</section>

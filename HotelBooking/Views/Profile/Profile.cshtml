@@ -9,9 +9,19 @@
         <partial name="_SidebarMenuPartial" />
     </div>
     <div class="col-9">
-            <p>Name : @Model.Name</p>
-            <p>Surname : @Model.Surname</p>
-            <p>Email : @Model.Email</p>
-
+        <div class="row">
+            <div class="col-3">
+                <div class="user-image">
+                    <img class="user-image__picture" src="https://images.unsplash.com/photo-1599409522056-e7fab1dadfec?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=715&q=80" alt="Profile img" />
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="user_info">
+                    <p>First name : @Model.Name</p>
+                    <p>Last name : @Model.Surname</p>
+                    <p>Email : @Model.Email</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
