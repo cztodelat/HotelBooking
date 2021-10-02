@@ -1,6 +1,7 @@
 ﻿using HotelBooking.DataAccess;
 using HotelBooking.Models;
 using HotelBooking.ViewModels;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,12 +15,14 @@ namespace HotelBooking.Controllers
     public class HomeController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly ILogger<HomeController> logger;
 
         public HomeController(
-            IUnitOfWork unitOfWork
-            )
+               IUnitOfWork unitOfWork,
+               ILogger<HomeController> logger)
         {
             this.unitOfWork = unitOfWork;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -37,6 +40,8 @@ namespace HotelBooking.Controllers
 
             if (hotel == null)
             {
+                var statusCodeResult = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+
                 Response.StatusCode = 404;
                 return View("HotelNotFound", hotelId);
             }

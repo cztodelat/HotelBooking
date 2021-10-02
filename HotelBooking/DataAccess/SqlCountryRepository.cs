@@ -10,7 +10,5 @@ namespace HotelBooking.DataAccess
     {
         public SqlCountryRepository(AppDbContext context) : base(context)
         {}
-
-        //TODO Make orderBy for get countries
     }
 }

@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using HotelBooking.DataAccess;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace HotelBooking.Controllers
 {
@@ -21,15 +23,17 @@ namespace HotelBooking.Controllers
 
         //This type helps us to get physical path to wwwroot folder 
         private readonly IWebHostEnvironment hostingEnvironment;
+        private readonly ILogger<ProfileController> logger;
         private ApplicationUser user = null;
         public ProfileController(UserManager<ApplicationUser> userManager,
                                  IUnitOfWork unitOfWork,
-                                 IWebHostEnvironment hostingEnvironment)
+                                 IWebHostEnvironment hostingEnvironment,
+                                 ILogger<ProfileController> logger)
         {
             this.userManager = userManager;
             this.unitOfWork = unitOfWork;
             this.hostingEnvironment = hostingEnvironment;
-
+            this.logger = logger;
         }
 
         [Route("Profile")]
@@ -182,6 +186,10 @@ namespace HotelBooking.Controllers
 
             if (hotel == null || hotel.OwnerId != user.Id)
             {
+                string owner = hotel == null ? " hotel doesn't exist" : hotel.Owner.Id;
+
+                logger.LogWarning($"The hotel that user tryed to acces is not found or user didn't have permissions. " +
+                    $"UserID = {user.Id}\nOwnerID={owner}");
                 Response.StatusCode = 404;
                 return View("HotelNotFound", hotelId);
             }
@@ -228,6 +236,11 @@ namespace HotelBooking.Controllers
 
             if (hotel == null || hotel.OwnerId != user.Id)
             {
+                string owner = hotel == null ? " hotel doesn't exist" : hotel.Owner.Id;
+
+
+                logger.LogWarning($"The hotel that user tryed to acces is not found or user didn't have permissions. " +
+                    $"UserID = {user.Id}\nOwnerID={owner}");
                 Response.StatusCode = 404;
                 return View("HotelNotFound", hotelId);
             }
@@ -311,11 +324,20 @@ namespace HotelBooking.Controllers
                 uniqueFileName = Guid.NewGuid() + "_" + model.Photo.FileName; //unique img file
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                try
                 {
-                    //Copy the photo to our server, into wwwroot/img folder
-                    model.Photo.CopyTo(fs);
+                    using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        //Copy the photo to our server, into wwwroot/img folder
+                        model.Photo.CopyTo(fs);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    logger.LogError("Something went wrong when photo was coping to the server.");
+                    logger.LogError(ex.ToString());
+                }
+                
             }
 
             return uniqueFileName;

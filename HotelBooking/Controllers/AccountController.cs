@@ -2,6 +2,7 @@
 using HotelBooking.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NETCore.MailKit.Core;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,17 @@ namespace HotelBooking.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailService emailService;
+        private readonly ILogger<AccountController> logger;
 
         public AccountController(UserManager<ApplicationUser> userManager,
                                  SignInManager<ApplicationUser> signInManager,
-                                 IEmailService emailService)
+                                 IEmailService emailService,
+                                 ILogger<AccountController> logger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailService = emailService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -63,6 +67,8 @@ namespace HotelBooking.Controllers
 
                 foreach (var error in result.Errors)
                 {
+                    logger.LogError($"{error.Description}");
+                    logger.LogError($"{error}");
                     ModelState.AddModelError("", error.Description);
                 }
             }
@@ -157,6 +163,7 @@ namespace HotelBooking.Controllers
         {
             if (email == null || token == null)
             {
+                logger.LogWarning("Invalid password reset token during password reset.");
                 ModelState.AddModelError("", "Invalid password reset token");
             }
             //Неявно присвает полям модели значение параметров имена которых совпадают

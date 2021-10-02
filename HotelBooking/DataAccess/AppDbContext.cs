@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.DataAccess
 {
-    //TODO Урать возможность удалять Users 
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
