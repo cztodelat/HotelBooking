@@ -278,7 +278,7 @@ namespace HotelBooking.Controllers
                 {
                     if (model.PhotoPath != null)
                     {
-                        string filePath = Path.Combine(hostingEnvironment.WebRootPath, "img", model.PhotoPath);
+                        string filePath = Path.Combine(hostingEnvironment.WebRootPath, "img\\hotel", model.PhotoPath);
                         System.IO.File.Delete(filePath);
                     }
 
@@ -320,7 +320,7 @@ namespace HotelBooking.Controllers
             {
 
                 string uploadsFolder = Path.Combine(/*path to wwwroot folder*/
-                                                     hostingEnvironment.WebRootPath, "img"); //Gat path wwwroot/img
+                                                     hostingEnvironment.WebRootPath, "img\\hotel"); //Gat path wwwroot/img
                 uniqueFileName = Guid.NewGuid() + "_" + model.Photo.FileName; //unique img file
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 

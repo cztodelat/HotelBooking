@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = Model.Hotel.HotelName;
-    string photoPath = "~/img/" + Model.Hotel.PhotoPath;
+    string photoPath = "~/img/hotel/" + Model.Hotel.PhotoPath;
     string address = $"{Model.Hotel.HotelAddress}, {Model.Hotel.Country.CountryName}, {Model.Hotel.HotelCity}";
     AddRoomViewModel addRoomViewModel = new AddRoomViewModel() { HotelId = Model.Hotel.HotelId };
 }

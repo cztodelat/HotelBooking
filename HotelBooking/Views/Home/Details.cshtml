@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Hotel Details";
-    string photoPath = "~/img/" + Model.PhotoPath;
+    string photoPath = "~/img/hotel/" + Model.PhotoPath;
     string address = $"{Model.HotelAddress}, {Model.Country.CountryName}, {Model.HotelCity}";
 
     BookViewModel bookViewModel = new BookViewModel()

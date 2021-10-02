@@ -1,7 +1,7 @@
 ﻿@model HotelModel
 
 @{ 
-    string photoPath = "~/img/" + Model.PhotoPath;
+    string photoPath = "~/img/hotel/" + Model.PhotoPath;
     string hotelAddress = $"{Model.HotelAddress}, {Model.HotelCity}, {Model.Country.CountryName}";
     string controller = (string)ViewData["controller"];
     string action = (string)ViewData["action"];

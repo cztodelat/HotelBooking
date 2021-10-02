@@ -13,6 +13,8 @@ namespace HotelBooking.Models
         public string Name { get; set; }
         [MaxLength(450)]
         public string Surname { get; set; }
+        [Required]
+        public string PhotoPath { get; set; }
         public List<HotelModel> Hotels { get; set; }
         public List<BookingModel> UserBookings { get; set; }
     }

@@ -1,11 +1,13 @@
 ﻿using HotelBooking.Models;
 using HotelBooking.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NETCore.MailKit.Core;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,16 +19,19 @@ namespace HotelBooking.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailService emailService;
         private readonly ILogger<AccountController> logger;
+        private readonly IWebHostEnvironment hostingEnvironment;
 
         public AccountController(UserManager<ApplicationUser> userManager,
                                  SignInManager<ApplicationUser> signInManager,
                                  IEmailService emailService,
-                                 ILogger<AccountController> logger)
+                                 ILogger<AccountController> logger,
+                                 IWebHostEnvironment hostingEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailService = emailService;
             this.logger = logger;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -40,12 +45,15 @@ namespace HotelBooking.Controllers
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = ProccessUploadedFile(model);
+
                 ApplicationUser user = new ApplicationUser()
                 {
                     Name = model.Name,
                     Surname = model.Surname,
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    PhotoPath = uniqueFileName
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);
@@ -223,6 +231,37 @@ namespace HotelBooking.Controllers
             }
 
             return View("NotFound");
+        }
+
+        private string ProccessUploadedFile(RegisterViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Photo != null)
+            {
+
+                string uploadsFolder = Path.Combine(/*path to wwwroot folder*/
+                                                     hostingEnvironment.WebRootPath, "img\\user"); //Gat path wwwroot/img
+                uniqueFileName = Guid.NewGuid() + "_" + model.Photo.FileName; //unique img file
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                try
+                {
+                    using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        //Copy the photo to our server, into wwwroot/img folder
+                        model.Photo.CopyTo(fs);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError("Something went wrong when photo was coping to the server.");
+                    logger.LogError(ex.ToString());
+                }
+
+            }
+
+            return uniqueFileName;
         }
     }
 }

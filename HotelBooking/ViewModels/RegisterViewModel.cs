@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace HotelBooking.ViewModels
 {
@@ -22,5 +23,8 @@ namespace HotelBooking.ViewModels
         [Compare("Password",
             ErrorMessage = "Password and confirmation password do not match.")] //Compare two passwords
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public IFormFile Photo { get; set; } //This type we set becouse this file that is uploaded to the server can be accesed thow ModelBinding
     }
 }
