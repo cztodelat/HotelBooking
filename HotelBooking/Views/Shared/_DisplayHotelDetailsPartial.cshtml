@@ -23,7 +23,9 @@
                         <a class="card__title-link" asp-controller="@controller" asp-action="@action" asp-route-hotelId="@Model.HotelId">@Model.HotelName</a>
                     </h2>
                     <span class="card__address">@hotelAddress</span>
-                    <p class="card__desc">@Model.HotelDescription</p>
+                    <p class="card__desc">
+                        @Model.HotelDescription
+                    </p>
                 </div>
 
                 <span class="card__email">Owner : @Model.Owner.Email</span>
