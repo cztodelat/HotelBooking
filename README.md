@@ -15,6 +15,21 @@ Other things
 - HTML & CSS
 
 # DB Diagram
-
+![DB diagram](./Screenshots/HotelBookingDiagram.png)
 
 # Some screenshots
+
+### Home page 
+
+![Home page](./Screenshots/HomePage.png)
+
+### Hotel details
+
+![Hotel details](./Screenshots/HotelDetails.png)
+
+### Profile
+
+![Hotel details](./Screenshots/ProfilePage.png)
+
+
+And so on...
