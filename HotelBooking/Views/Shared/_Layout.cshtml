@@ -8,61 +8,69 @@
     <title>@ViewData["Title"] - HotelBooking</title>
     <link href="~/css/normalize.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/lib/tingle/tingle.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelBooking</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Hotels</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item mx-2">
-                                <a asp-controller="Profile" asp-action="Profile" class="btn btn-primary">My Profile</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item mx-2">
-                                <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Register</a>
-                            </li>
-                            <li class="nav-item mx-2">
-                                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-dark">Sign in</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div class="main-wrapper">
+        <div class="main-wrapper__content">
+            <header>
+                <nav class="navigation">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2 col-md-2 d-flex d-flex-align-items-c">
+                                <a class="navigation__logo" asp-controller="Home" asp-action="Index">HotelBooking</a>
+                            </div>
+                            <div class="col-10 col-md-7 order-md-4 d-flex d-flex-justify-end">
+                                <ul class="navigation__authentication-list clear-list">
+                                    @if (signInManager.IsSignedIn(User))
+                                    {
+                                        <li class="navigation__authentication-list-item">
+                                            <a asp-controller="Profile" asp-action="Profile" class="btn btn_header">My Profile</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="navigation__authentication-list-item">
+                                            <a class="btn navigation__list-item-link btn_header" asp-controller="Account" asp-action="Register">Register</a>
+                                        </li>
+                                        <li class="navigation__authentication-list-item">
+                                            <a class="btn navigation__list-item-link btn_header" asp-controller="Account" asp-action="Login">Sign in</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-md-3 order-md-1 d-flex d-flex-justify-center">
+                                <ul class="navigation__list clear-list">
+                                    <li class="navigation__list-item">
+                                        <a class="navigation__list-item-link navigation__list-item-link_primary" asp-controller="Home" asp-action="Index">Home</a>
+                                    </li>
+                                    <li class="navigation__list-item">
+                                        <a class="navigation__list-item-link navigation__list-item-link_primary" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
 
-    <main>
-        @RenderBody()
-    </main>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - HotelBooking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main>
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+
+        <footer class="footer">
+            <div class="container">
+                &copy; 2021 - HotelBooking - <a class="footer__link" asp-action="Privacy" asp-controller="Home">Privacy</a>
+            </div>
+        </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validate/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/tingle/tingle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

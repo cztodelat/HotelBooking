@@ -1,23 +1,22 @@
-﻿
-<ul class="nav flex-column">
-    <li class="nav-item">
-        <a asp-controller="Profile" asp-action="Profile" class="nav-link">Profile</a>
+﻿<ul class="profile-menu clear-list">
+    <li class="profile-menu__item">
+        <a class="profile-menu__item-link" asp-controller="Profile" asp-action="Profile">Profile</a>
     </li>
-    <li class="nav-item">
-        <a asp-controller="Profile" asp-action="Bookings" class="nav-link">Bookings</a>
+    <li class="profile-menu__item">
+        <a class="profile-menu__item-link" asp-controller="Profile" asp-action="Bookings">Bookings</a>
     </li>
-    <li class="nav-item">
-        <a asp-controller="Profile" asp-action="AddHotel" class="nav-link">Add Hotel</a>
+    <li class="profile-menu__item">
+        <a class="profile-menu__item-link" asp-controller="Profile" asp-action="AddHotel">Add Hotel</a>
     </li>
-    <li class="nav-item">
-        <a asp-controller="Profile" asp-action="MyOffers" class="nav-link">My offers</a>
+    <li class="profile-menu__item">
+        <a class="profile-menu__item-link" asp-controller="Profile" asp-action="MyOffers">My offers</a>
     </li>
-    <li class="nav-item">
-        <a asp-controller="Profile" asp-action="Payments" class="nav-link">Payments</a>
+    <li class="profile-menu__item">
+        <a class="profile-menu__item-link" asp-controller="Profile" asp-action="Payments">Payments</a>
     </li>
-    <li>
-        <form asp-action="Logout" asp-controller="Account" method="post">
-            <button type="submit" class="nav-link btn btn-link py-0" style="width: auto">
+    <li class="profile-menu__item">
+        <form class="profile-menu__form" asp-action="Logout" asp-controller="Account" method="post">
+            <button class="profile-menu__form-submit" type="submit">
                 Logout
             </button>
         </form>

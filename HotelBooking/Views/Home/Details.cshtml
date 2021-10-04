@@ -13,25 +13,26 @@
         Rooms = Model.Rooms.Where(x => x.RoomStatus.IsRoomOccupied == false).ToList()
     };
 }
-
-<div class="row">
-    <div class="col-12">
+<section class="details">
+    <div class="container">
         <div class="row">
-            <div class="col-auto">
-                <h2>@Model.HotelName</h2>
-            </div>
-            <div class="col-2 mt-1">
-                <!-- Button triggers modal -->
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bookModal">
-                    Book the hotel
-                </button>
+            <div class="col-md-12">
+                <div class="row margin-b-sm">
+                    <div class="col-md-auto">
+                        <h2>@Model.HotelName</h2>
+                    </div>
+                </div>
+
+                <div class="hotel-details margin-b-md">
+                    <span class="hotel-details__address hotel-details__address_margin-b-md"><strong>Address :</strong> @address</span>
+                    <div class="hotel-details__image-wrapper margin-b-sm">
+                        <img class="hotel-details__image" src="@photoPath" asp-append-version="true" />
+                    </div>
+                    <p class="hotel-details__description">@Model.HotelDescription</p>
+                </div>
             </div>
         </div>
 
-        <p><strong>Address :</strong> @address</p>
-        <img class="d-block w-75" src="@photoPath" asp-append-version="true" />
-        <p class="pt-3">@Model.HotelDescription</p>
+        <partial name="_BookRoomPartial" model="bookViewModel">
     </div>
-</div>
-
-<partial name="_BookRoomPartial" model="bookViewModel">
+</section>

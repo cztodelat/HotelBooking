@@ -2,6 +2,14 @@
 
 :root {
     --link-color: #0d6efd;
+    --btn-bg-color: #0d6efd;
+    --btn-bg-success-color: #198754;
+    --input-color: #212529;
+    --validation-color: #d71d00;
+    --border-radius: 10px;
+    --border-radius-small: 5px;
+    --border-color: #808080;
+    --border-input-color: #ced4da;
 }
 
 html {
@@ -9,6 +17,7 @@ html {
     -ms-text-size-adjust: 100%;
     -ms-overflow-style: scrollbar;
     -webkit-tap-highlight-color: transparent;
+    height: 100%;
 }
 
 body {
@@ -16,23 +25,74 @@ body {
     font-size: 16px;
     font-family: Helvetica, Arial, sans-serif;
     line-height: 1.4;
+    height: 100%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6, p, ul, li {
     margin: 0;
 }
 
+/*BEGIN Universal modificators*/
+
 .d-flex {
     display: flex;
 }
 
+.d-flex-justify-end {
+    justify-content: flex-end;
+}
+
+.d-flex-justify-center {
+    justify-content: center;
+}
+
+.d-flex-align-items-c {
+    align-items: center;
+}
+
+.margin-b-md {
+    margin-bottom: 30px;
+}
+
+.margin-b-sm {
+    margin-bottom: 20px;
+}
+
+.clear-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/*END Universal modificators*/
+
+/*BEGIN main wrapper*/
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+
+/*END Main wrapper*/
 
 
 /*BEGIN Card styles*/
-
 .card {
-    border: 1px solid #808080;
-    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
     overflow: hidden;
 }
 
@@ -68,13 +128,6 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 .card__info {
     margin-bottom: 10px;
     margin-right: 10px;
-    /*position: relative;
-    padding-bottom: 30px;*/
-}
-
-.card__email {
-    /*position: absolute;
-    bottom: 0;*/
 }
 
 .card__image-wrapper {
@@ -89,11 +142,20 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
     object-fit: cover;
 }
 
+/*Modificator*/
+/*Только маргин правый и нижний у блоков. Всё толкаем вниз и в право*/
+.card_margin-b-md {
+    margin-bottom: 20px;
+}
 
+.card_checkbox {
+    width: calc(100% - 16px);
+}
 /*END Card styles*/
+/*BEGIN User profile*/
 .user-image {
     height: 375px;
-    width: 100%;
+    width: 100px;
     outline: none;
     position: relative;
 }
@@ -103,14 +165,380 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
     object-fit: contain;
 }
 
-/*Modificator*/
-/*Только маргин правый и нижний у блоков. Всё толкаем вниз и в право*/
-.card_margin-b-md {
-    margin-bottom: 20px;
+@media (min-width: 768px) {
+    .user-image {
+        width: 100%;
+    }
+}
+/*END User profile*/
+/*BEGIN Profile menu*/
+.profile-menu {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profile-menu__item {
+    margin-bottom: 15px;
+    width: 33.333333%;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .profile-menu {
+        flex-direction: column;
+    }
+
+    .profile-menu__item {
+        margin-bottom: 15px;
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+.profile-menu__item-link, .login-account-form__forgot-link {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+.profile-menu__form-submit {
+    color: var(--link-color);
+    background: none;
+    border: none;
+    padding: 0px;
+    cursor: pointer;
+}
+
+/*END Profile menu*/
+
+/*BEGIN User info*/
+
+.user-info__item {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/*END User info*/
+
+
+
+/*BEGIN checkbox-box style*/
+
+.checkbox-box {
+    display: flex;
+    width: 100%;
+    align-items: center;
 }
 
 
+.checkbox-box__field_margin-r-sm {
+    margin-right: 10px;
+}
+
+/*END checkbox-box style*/
+
+/*BEGIN select-box style*/
+
+.select-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
 
 
+.select-box__label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
 
+.select-box__field {
+    border: 1px solid var(--border-input-color);
+    border-radius: var(--border-radius-small);
+    color: var(--input-color);
+    padding: 8px 10px;
+    margin-bottom: 2px;
+}
+
+.select-box__field-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.select-box_margin-b-md {
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .select-box {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .select-box_margin-b-md {
+        margin-bottom: 25px;
+    }
+
+    .select-box__label {
+        width: 20%;
+        font-size: 16px;
+        margin: 0px;
+    }
+
+    .select-box__field-wrapper {
+        width: 80%;
+    }
+}
+
+/*END select-box style*/
+
+
+/*BEGIN input style*/
+.input-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.input-box__field-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box_margin-b-md {
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .input-box {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .input-box_margin-b-md {
+        margin-bottom: 25px;
+    }
+}
+
+.input-box_margin-b-sm,
+.checkbox-box_margin-b-sm {
+    margin-bottom: 10px;
+}
+
+.input-box__label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.input-box__field {
+    border: 1px solid var(--border-input-color);
+    border-radius: var(--border-radius-small);
+    color: var(--input-color);
+    padding: 8px 10px;
+    margin-bottom: 2px;
+}
+
+@media (min-width: 768px) {
+    .input-box__label {
+        width: 20%;
+        font-size: 16px;
+        margin: 0px;
+    }
+
+    .input-box__field-wrapper {
+        width: 80%;
+    }
+}
+
+/*END input style*/
+
+
+/*BEGIN button*/
+.btn {
+    background-color: var(--btn-bg-color);
+    color: #fff;
+    border: 1px solid var(--btn-bg-color);
+    border-radius: var(--border-radius-small);
+    padding: 5px 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: var(--btn-bg-success-color);
+}
+
+.btn_margin-b-sm {
+    margin: 10px;
+}
+
+.btn_header {
+    width: 105px;
+    display: inline-block;
+    text-align: center;
+}
+/*END button*/
+
+
+/*BEGIN Validation*/
+.validation {
+    color: var(--validation-color);
+    font-size: 12px;
+}
+
+/*END Validation*/
+
+/*BEGIN Hotel details*/
+
+.hotel-details__address {
+    display: inline-block;
+}
+
+.hotel-details__description {
+    font-size: 14px;
+}
+
+.hotel-details__address_margin-b-md {
+    margin-bottom: 20px;
+}
+
+.hotel-details__address {
+    font-size: 14px;
+}
+
+.hotel-details__image-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.hotel-details__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .hotel-details__image-wrapper {
+        width: 650px;
+    }
+
+    .hotel-details__description {
+        font-size: 16px;
+    }
+
+    .hotel-details__address {
+        font-size: 16px;
+    }
+}
+
+/*END Hotel details*/
+
+
+/*BEGIN Room*/
+
+.room {
+    display: flex;
+    align-items: center;
+}
+
+.room__checkbox-wrapper {
+    width: 16px;
+}
+
+/*END Room*/
+
+
+/*BEGIN Order*/
+.order__date {
+    display: inline-block;
+}
+
+.order__date-margin-b-sm {
+    margin-bottom: 10px;
+}
+
+.order_hotel-name_margin-b-sm {
+    margin-bottom: 5px;
+}
+/*END Order*/
+
+/*BEGIN Navigation*/
+
+.navigation {
+    box-shadow: 0 4px 2px -2px gray;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.navigation__list-item-link {
+    text-decoration: none;
+}
+
+.navigation__logo {
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .navigation__logo:hover {
+        color: black;
+    }
+
+.navigation__list {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .navigation__list {
+        padding: 0;
+    }
+}
+
+.navigation__authentication-list-item,
+.navigation__list-item {
+    margin-right: 20px;
+}
+
+.navigation__authentication-list-item {
+    margin-bottom: 10px;
+}
+
+.navigation__authentication-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+@media (min-width: 768px) {
+    .navigation__authentication-list {
+        flex-direction: row;
+    }
+
+    .navigation__authentication-list-item {
+        margin-bottom: 0px;
+    }
+}
+
+.navigation__list-item-link_primary {
+    color: var(--link-color);
+}
+/*END Navigation*/
+/*BEGIN Footer*/
+.footer {
+    margin-top: 10px;
+    padding: 10px 0;
+    box-shadow: 0px 2px 2px -2px gray, 0px -2px 2px -2px gray;
+}
+
+.footer__link {
+    text-decoration: none;
+}
+
+/*END Footer*/
 

@@ -5,24 +5,31 @@
     ViewData["Title"] = "Profile";
 }
 
-<div class="row">
-    <div class="col-3">
-        <partial name="_SidebarMenuPartial" />
-    </div>
-    <div class="col-9">
+
+<section class="profile">
+    <div class="container">
         <div class="row">
-            <div class="col-3">
-                <div class="user-image">
-                    <img class="user-image__picture" src="@photoPath" alt="Profile img" asp-append-version="true"/>
-                </div>
+            <div class="col-md-3">
+                <aside class="aside">
+                    <partial name="_SidebarMenuPartial" />
+                </aside>
             </div>
-            <div class="col-9">
-                <div class="user_info">
-                    <p>First name : @Model.Name</p>
-                    <p>Last name : @Model.Surname</p>
-                    <p>Email : @Model.Email</p>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="user-image">
+                            <img class="user-image__picture" src="@photoPath" alt="Profile img" asp-append-version="true" />
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="user-info">
+                            <span class="user-info__item">First name: @Model.Name</span>
+                            <span class="user-info__item">Last name: @Model.Surname</span>
+                            <span class="user-info__item">Email: @Model.Email</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>

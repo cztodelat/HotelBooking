@@ -1,57 +1,80 @@
 ﻿@model AddRoomViewModel
-<!-- Modal -->
-<div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelby="addRoom" aria-hidden="true">
+
+<div class="modal hidden" id="addRoomModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Room</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h3 class="modal-title margin-b-md" id="exampleModalLabel">Room</h3>
             </div>
             <form method="post" asp-action="AddRoom" asp-controller="Profile">
                 <input asp-for="HotelId" hidden />
                 <div class="modal-body">
-                    <div class="row mb-3">
+
+                    <div class="row">
                         <div class="col-12">
-                            <label asp-for="RoomNumber">Room number</label>
-                            <input asp-for="RoomNumber" class="form-control" />
-                            <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                            <div class="input-box input-box_margin-b-md">
+                                <label class="input-box__label" asp-for="RoomNumber">Room number</label>
+                                <div class="input-box__field-wrapper">
+                                    <input class="input-box__field" asp-for="RoomNumber" />
+                                    <span class="validation" asp-validation-for="RoomNumber"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+
+                    <div class="row">
                         <div class="col-12">
-                            <label asp-for="Floor">Floor</label>
-                            <input asp-for="Floor" class="form-control" />
-                            <span asp-validation-for="Floor" class="text-danger"></span>
+                            <div class="input-box input-box_margin-b-md">
+                                <label class="input-box__label" asp-for="Floor">Floor</label>
+                                <div class="input-box__field-wrapper">
+                                    <input class="input-box__field" asp-for="Floor" />
+                                    <span class="validation" asp-validation-for="Floor"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+
+                    <div class="row">
                         <div class="col-12">
-                            <label asp-for="Description">Description</label>
-                            <input asp-for="Description" class="form-control" />
-                            <span asp-validation-for="Description" class="text-danger"></span>
+                            <div class="input-box input-box_margin-b-md">
+                                <label class="input-box__label" asp-for="Description">Description</label>
+                                <div class="input-box__field-wrapper">
+                                    <input class="input-box__field" asp-for="Description" />
+                                    <span class="validation" asp-validation-for="Description"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+
+                    <div class="row">
                         <div class="col-12">
-                            <label asp-for="RoomPrice">Price</label>
-                            <input asp-for="RoomPrice" class="form-control" />
-                            <span asp-validation-for="RoomPrice" class="text-danger"></span>
+                            <div class="input-box input-box_margin-b-md">
+                                <label class="input-box__label" asp-for="RoomPrice">Price</label>
+                                <div class="input-box__field-wrapper">
+                                    <input class="input-box__field" asp-for="RoomPrice" />
+                                    <span class="validation" asp-validation-for="RoomPrice"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+
+                    <div class="row">
                         <div class="col-12">
-                            <label asp-for="RoomStatus">Status</label>
-                            <select asp-for="RoomStatus" asp-items="Html.GetEnumSelectList<RoomStatusEnum>()" class="form-select" required>
-                                <option value="">Pleace select.</option>
-                            </select>
-                            <span asp-validation-for="RoomStatus" class="text-danger"></span>
+                            <div class="select-box select-box_margin-b-md">
+                                <label class="select-box__label" asp-for="RoomStatus">Country:</label>
+                                <div class="select-box__field-wrapper">
+                                    <select asp-for="RoomStatus" asp-items="Html.GetEnumSelectList<RoomStatusEnum>()" class="select-box__field">
+                                        <option value="value">Pleace select</option>
+                                    </select>
+                                    <span class="validation" asp-validation-for="RoomStatus"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary modal-close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary modal-close">Save changes</button>
+                    </div>
             </form>
         </div>
     </div>

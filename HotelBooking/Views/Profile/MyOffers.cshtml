@@ -5,15 +5,20 @@
     ViewData["controller"] = "Profile";
     ViewData["action"] = "MyOfferDetails";
 }
-
-<div class="row">
-    <div class="col-3">
-        <partial name="_SidebarMenuPartial" />
+<section class="my-offers">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <aside class="aside">
+                    <partial name="_SidebarMenuPartial" />
+                </aside>
+            </div>
+            <div class="col-md-9">
+                @foreach (var hotel in Model)
+                {
+                    <partial name="_DisplayHotelDetailsPartial" model="hotel" view-data="ViewData" />
+                }
+            </div>
+        </div>
     </div>
-    <div class="col-9">
-        @foreach (var hotel in Model)
-        {
-            <partial name="_DisplayHotelDetailsPartial" model="hotel" view-data="ViewData" />
-        }
-    </div>
-</div>
+</section>

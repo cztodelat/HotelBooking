@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace HotelBooking.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -37,7 +38,6 @@ namespace HotelBooking.Controllers
         }
 
         [Route("Profile")]
-        [Authorize]
         public async Task<IActionResult> Profile()
         {
             user ??= await GetCurrentUserAsync();
